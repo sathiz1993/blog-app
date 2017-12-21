@@ -1,0 +1,14 @@
+{
+  "name": "sathish_static",
+  "version": "1.0.0",
+  "description": "Simple preview",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js":
+  },
+  "author": "Sathish Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
