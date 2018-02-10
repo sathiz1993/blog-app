@@ -1,15 +1,28 @@
 {
-  "name": "sathish_static",
+  "name": "static_blog",
   "version": "1.0.0",
-  "description": "Simple preview",
+  "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js":
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Sathish Kumar",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sathiz1993/blog-app.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "Sathish Kumar T",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sathiz1993/blog-app/issues"
+  },
+  "homepage": "https://github.com/sathiz1993/blog-app#readme",
   "dependencies": {
+    "colors": "^1.1.2",
     "express": "^4.16.2",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "winston-request-logger": "^1.0.7"
   }
 }
