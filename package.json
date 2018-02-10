@@ -22,6 +22,7 @@
   "dependencies": {
     "colors": "^1.1.2",
     "express": "^4.16.2",
+    "mongodb": "^3.0.2",
     "morgan": "^1.9.0",
     "winston-request-logger": "^1.0.7"
   }
