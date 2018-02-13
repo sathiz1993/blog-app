@@ -1,33 +1,7 @@
 var express = require('express')
 var path = require('path')
-var morgan = require('morgan')
-var winston = require('winston')
+var logger = require('./config')
 var winston_req_logger = require('winston-request-logger')
-
-// Logger timestamp format
-const tsFormat = () => (new Date()).toISOString();
-
-// Winston logger instance
-var logger = new winston.Logger({
-    transports: [
-        new winston.transports.File({
-            level: 'info',
-            filename: '/tmp/node_app.log',
-            handleExceptions: true,
-            json: true,
-            maxsize: 10485760, //10MB
-            maxFiles: 5,
-            timestamp: tsFormat,
-        }),
-        new winston.transports.Console({
-            level: 'info',
-            handleExceptions: true,
-            json: true,
-            timestamp: tsFormat
-        }),
-    ],
-    exitOnError: false
-})
 
 // Express app instance
 var app = express()
@@ -44,13 +18,15 @@ app.use(winston_req_logger.create(logger, {
 
 
 // Configure middle ware for static
-app.use(express.static(path.join(__dirname, 'public/templates')))
+app.use(express.static(path.join(__dirname, 'static')))
 
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', function (req, res) {
-    res.render('index')
-})
-
+// Run the express app instance in 3000
 app.listen(3000, function(){
-    logger.info("Application is running at http://127.0.0.1:3000")
+    logger.info("Application is running at http://127.0.0.1:3000");
 });
+
+// Expose the express app instance
+module.exports = app;
+
+// Import the routes
+require('./routes/index')
