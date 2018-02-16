@@ -1,4 +1,4 @@
-var mangoose = require('mangoose');
+var mangoose = require('mongoose');
 var schema = mangoose.Schema
 
 // Create user schema
