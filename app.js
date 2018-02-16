@@ -2,9 +2,16 @@ var express = require('express')
 var path = require('path')
 var logger = require('./config')
 var winston_req_logger = require('winston-request-logger')
+var bodyParser = require('body-parser')
 
 // Express app instance
 var app = express()
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 // Create custom request logger format
 app.use(winston_req_logger.create(logger, {
@@ -14,11 +21,11 @@ app.use(winston_req_logger.create(logger, {
     'responseTime': ':responseTime ms',
     'clientIp': ':ip',
     'browser': ':userAgent',
-},false))
+},false));
 
 
 // Configure middle ware for static
-app.use(express.static(path.join(__dirname, 'static')))
+app.use(express.static(path.join(__dirname, 'static')));
 
 // Run the express app instance in 3000
 app.listen(3000, function(){
@@ -30,3 +37,5 @@ module.exports = app;
 
 // Import the routes
 require('./routes/index')
+require('./routes/user')
+require('./routes/post')
