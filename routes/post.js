@@ -54,13 +54,56 @@ app.get('/users/:user_id/posts/:post_id', function(req, res, nxt) {
 });
 
 // Update post
-app.patch('/users/:user_id/posts/:post_id', function(req, res, nxt) {
-    res.send("Update post");
+app.patch('/users/:user_id/posts/:post_id', userfunction(req, res, nxt) {
+    let post_id = req.param.post_id;
+    // Get the user id from request
+    let user_id = req.param.user_id;
+    // Validate the ownership of the post
+    let data = req.body,data;
+    post.findOneAndUpdate({'id': post_id}, data, function(err, doc){
+        if (err){
+            res.status(500).json({
+                //Error response
+                'status': 'error',
+                'code': 500,
+                'message': err
+            })
+        }
+        else {
+            // Success response
+            res.status(200).json({
+                'status': 'success',
+                'code': 200,
+                'message': 'Post updated successfully'
+            })
+        } 
+    })
 });
 
 // Delete post
 app.delete('/users/:user_id/posts/:post_id', function(req, res, nxt) {
-    res.send("Delete post");
+    let post_id = req.param.post_id;
+    // Get the user id from request
+    let user_id = req.param.user_id;
+    // Validate the ownership of the post
+    let data = req.body,data;
+    post.findOneAndRemove({'_id': post_id}, function(err, doc){
+        if (err) {
+            res.status(400).json({
+                // Error response
+                'status': 'error',
+                'code': 400,
+                'message': err
+            })
+        }
+        else {
+            // Success response
+            res.status(200).json({
+                'status': 'success',
+                'code': 200,
+                'message': 'User deleted successfully'
+            })
+        }
 });
 
 module.exports = app
