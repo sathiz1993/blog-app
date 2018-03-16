@@ -13,5 +13,15 @@ var commentSchema = new Schema({
 // Create a model using schema
 var Comments = mangoose.model('Comments', commentSchema);
 
+// Function to get comment in response format
+Comments.methods.toResJSON = function (this) {
+	return {
+		'comment': this.comment,
+		'created': this.created,
+		'updated': this.updated,
+		'author': this.author
+	}
+};
+
 // Export to other module
 module.exports = Comments;
